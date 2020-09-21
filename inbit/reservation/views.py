@@ -34,8 +34,25 @@ class QueueViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         pass
 
-class ReservationViewSet(viewsets.ViewSet):
-    
+class GETReservationAPI(mixins.RetrieveModelMixin):
+
+    def retrieve(self, request, *args, **kwargs):
+        room_queryset = Reservation.objects.get(room_id=self.kwargs["room_id"])
+        first_queryset = list(room_queryset.objects.filter(period=10))
+        second_queryset = list(room_queryset.objects.filter(period=11))
+        
+        data = [
+            {
+                "period":10,
+                "people": len(first_queryset)
+            },
+            {
+                "period":11,
+                "people": len(second_queryset)
+            }
+        ]
+
+        return Response(data)
 
         
 
@@ -52,7 +69,7 @@ class AdminQueueAPI(viewsets.ModelViewSet):
     
 
 
-class AdminReservationAPI(generics.Model):
+class AdminReservationAPI(viewsets.ModelViewSet):
     serializer_class = ReservationSerializer
     queryset = Reservation.objects.all()
     
