@@ -7,28 +7,39 @@ from .models import Reservation,Reservation_queue
 from .serializers import ReservationSerializer, QueueSerializer
 # Create your views here.
 
-class CreateQueueAPI(generics.CreatedAPIView):
-
+class QueueViewSet(viewsets.ViewSet):
     #인증검사
-    serializer_class = QueueSerializer
 
-    #email -> self.request.user.email 로 바꿀것
-    def post(self, request, *arg, **kwargs):
-        request.data["email"] = "email"
-        return super().post(request,*args,**kwargs)
+    def create(self,request):
+        request.data["email"] = reqeust.user.email
+        serializer = Reservation_queue(data=request.data)
+
+        if not serializer.is_valid():
+            return Response(serializer.errors)
+
+        serializer.save()
+        return Response(serializer.data)
+
+
+    def list(self, request):
+
+        queryset = Reservation_queue.objects.filter(email=request.user.email)
+        serializer = QueueSerializer(queryset, many=True)
+
+        return Response(serializer.data)
+
+    def partial_update(self, request, pk=None):
+        pass
+
+    def destroy(self, request, pk=None):
+        pass
+
+class ReservationViewSet(viewsets.ViewSet):
+    
+
         
 
-    
-class ListReservationAPI(generics.ListAPIView):
 
-    serializer_class = ReservationSerializer
-
-    def get(self,request,*arg,**kwargs):
-        return super().get(request,*arg,**kwargs)
-
-    def get_queryset(self):
-        return Reservation.objects.all()
-    
 
 class AdminQueueAPI(viewsets.ModelViewSet):
     serializer_class = QueueSerializer
@@ -37,7 +48,7 @@ class AdminQueueAPI(viewsets.ModelViewSet):
     #email -> self.request.user.email 로 바꿀것
     def post(self,request,*arg,**kwargs):
         request.data["email"] = "email"
-        return super().post(reqeust,*args,**kwargs)
+        return super().post(request,*arg,**kwargs)
     
 
 
