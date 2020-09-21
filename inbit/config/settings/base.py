@@ -25,7 +25,7 @@ CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, ".config_secret")
 CONFIG_SECRET_COMMON_FILE = os.path.join(CONFIG_SECRET_DIR, "settings_common.json")
 CONFIG_SECRET_DEPLOY_FILE = os.path.join(CONFIG_SECRET_DIR, "settings_deploy.json")
 
-config_secret_common = json.loads(open(CONFIG_SECRET_COMMON_FILE).read())
+config_secret_common = json.loads(open(CONFIG_SECRET_COMMON_FILE).read(),encoding="utf-8")
 config_secret_deploy = json.loads(open(CONFIG_SECRET_DEPLOY_FILE).read())
 
 SECRET_KEY = config_secret_common['django']['secret_key']
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'reservation',
 ]
 
 MIDDLEWARE = [
