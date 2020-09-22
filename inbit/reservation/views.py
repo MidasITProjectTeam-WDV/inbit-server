@@ -52,7 +52,8 @@ class QueueViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         pass
 
-class GETReservationAPI(mixins.RetrieveModelMixin):
+class GETReservationAPI(mixins.RetrieveModelMixin,
+                        generics.GenericAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         room_queryset = Reservation.objects.get(room_id=self.kwargs["room_id"])
