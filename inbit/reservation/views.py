@@ -2,14 +2,12 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics,mixins,viewsets
-
 from .models import Reservation,Reservation_queue
 from .serializers import ReservationSerializer, QueueSerializer
 # Create your views here.
 
 class QueueViewSet(viewsets.ViewSet):
     #인증검사
-
     def create(self,request):
         request.data["email"] = request.user.email
         serializer = Reservation_queue(data=request.data)
