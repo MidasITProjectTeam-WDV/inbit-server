@@ -3,6 +3,7 @@ from django.urls import path,include
 
 from .views import (
     QueueViewSet,
+    GETReservationAPI,
     AdminQueueAPI,
     AdminReservationAPI
 )
@@ -14,4 +15,6 @@ router.register(r"queue",QueueViewSet,basename="queue")
 
 urlpatterns = [
     path('', include(router.urls)),
+    path("<room_id>", GETReservationAPI.as_view()),
 ]
+ 
