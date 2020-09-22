@@ -21,4 +21,5 @@ from room.views import RoomAdminViewSet
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("room/",include("room.urls")),
+    path("reserve/",include("reservation.urls")),
 ]

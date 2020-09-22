@@ -11,7 +11,7 @@ class QueueViewSet(viewsets.ViewSet):
     #인증검사
 
     def create(self,request):
-        request.data["email"] = reqeust.user.email
+        request.data["email"] = request.user.email
         serializer = Reservation_queue(data=request.data)
 
         if not serializer.is_valid():
@@ -53,7 +53,7 @@ class QueueViewSet(viewsets.ViewSet):
         pass
 
 class ReservationViewSet(viewsets.ViewSet):
-    
+    pass
 
         
 
@@ -70,7 +70,7 @@ class AdminQueueAPI(viewsets.ModelViewSet):
     
 
 
-class AdminReservationAPI(generics.Model):
+class AdminReservationAPI(viewsets.ModelViewSet):
     serializer_class = ReservationSerializer
     queryset = Reservation.objects.all()
     
