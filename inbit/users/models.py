@@ -8,7 +8,7 @@ class Users(models.Model):
     password = models.CharField("password", max_length=100)
     phone_num = models.IntegerField("phone number")
     position = models.IntegerField("school positino")
-    is_admin = models.BooleanField('is admin')
+    is_admin = models.BooleanField('is admin', default=False)
     class Meta:
         verbose_name = 'User'
         ordering = ["position"]
