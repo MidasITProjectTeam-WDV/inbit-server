@@ -15,5 +15,6 @@ router.register(r"queue",QueueViewSet,basename="queue")
 
 urlpatterns = [
     path('', include(router.urls)),
-    path("<room_id>", GETReservationAPI.as_view())
+    path("<room_id>", GETReservationAPI.as_view()),
 ]
+ 
