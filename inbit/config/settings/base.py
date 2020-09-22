@@ -52,11 +52,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_authtoken',
     'rest_framework',
     'users',
     'room',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permission.IsAuthenticated',
+    )
+}
 
 LOGIN_URL = '/auth/login/'
 LOGOUT_URL = '/auth/logout/'
