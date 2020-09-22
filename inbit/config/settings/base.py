@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_authtoken',
     'rest_framework',
     'users',
+    'room',
 ]
 
 LOGIN_URL = '/auth/login/'
